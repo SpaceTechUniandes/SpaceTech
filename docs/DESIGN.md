@@ -100,3 +100,16 @@ El hero de la portada mide **exactamente una pantalla** a cualquier altura de
 viewport: la fotografía absorbe el espacio sobrante mediante flex, de modo que
 la franja de fichas siempre cierra justo en el borde inferior. Verificado a
 663, 713, 813 y 913 px de alto.
+
+## Tamaño de las tarjetas
+
+`--card-scale` controla el ancho de las tarjetas del carrusel. Vale `1` en
+móvil y `0.7071` (1/√2) desde 768px, lo que deja **la mitad de área**
+conservando la proporción 4:3: el encuadre de la fotografía no cambia, sólo
+su tamaño.
+
+En móvil no se reduce a propósito. La tarjeta ya es estrecha y encogerla deja
+el texto en líneas de pocas letras.
+
+Para ajustar el tamaño de todas las tarjetas a la vez basta con cambiar esa
+variable; no hay medidas duplicadas por breakpoint.

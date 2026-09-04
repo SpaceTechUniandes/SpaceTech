@@ -30,6 +30,12 @@
   --edge: calc(max(0px, (100vw - var(--max-width))) / 2 + var(--container-padding));
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Escala de las tarjetas del carrusel. En móvil no se reduce: la tarjeta
+     ya es estrecha y encogerla dejaría el texto en líneas de pocas letras.
+     Desde 768px pasa a 1/√2, que deja la mitad de área conservando la
+     proporción: el encuadre no cambia, sólo el tamaño. */
+  --card-scale: 1;
 }
 
 /* ------------------------------------------------------------
@@ -617,9 +623,11 @@ body.nav-open {
   margin-top: 1rem;
 }
 
-/* Marco vacío a la espera de la línea de tiempo y los indicadores */
+/* Marco vacío a la espera de la línea de tiempo y los indicadores.
+   Mismo ancho que tendrá la tarjeta, para que ambas columnas casen. */
 .track__slot {
-  min-height: 260px;
+  width: calc(100% * var(--card-scale));
+  min-height: 200px;
   margin-top: 1.75rem;
   border: 1px solid var(--color-border);
 }
@@ -654,7 +662,7 @@ body.nav-open {
 }
 
 .carousel__track > .card {
-  flex: 0 0 100%;
+  flex: 0 0 calc(100% * var(--card-scale));
   scroll-snap-align: start;
 }
 
@@ -769,7 +777,7 @@ body.nav-open {
 
 /* En página completa caben varias tarjetas a la vez */
 .carousel--wide .carousel__track > .card {
-  flex-basis: 86%;
+  flex-basis: calc(86% * var(--card-scale));
 }
 
 /* ------------------------------------------------------------
@@ -961,6 +969,7 @@ body.nav-open {
   :root {
     --header-height: 72px;
     --container-padding: 2.5rem;
+    --card-scale: 0.7071;
   }
 
   .grid-lines {
@@ -1140,12 +1149,12 @@ body.nav-open {
 
   /* Con dos columnas cada tarjeta ya ocupa media pantalla: no se estrecha más */
   .carousel__track > .card {
-    flex-basis: 100%;
+    flex-basis: calc(100% * var(--card-scale));
   }
 
   /* A ancho completo caben dos tarjetas, y se insinúa la tercera */
   .carousel--wide .carousel__track > .card {
-    flex-basis: calc((100% - 1.5rem) / 2);
+    flex-basis: calc((100% - 1.5rem) / 2 * var(--card-scale));
   }
 
 }
@@ -1160,7 +1169,7 @@ body.nav-open {
 
   /* Tres tarjetas por vista en pantallas anchas */
   .carousel--wide .carousel__track > .card {
-    flex-basis: calc((100% - 3rem) / 3);
+    flex-basis: calc((100% - 3rem) / 3 * var(--card-scale));
   }
 
 
