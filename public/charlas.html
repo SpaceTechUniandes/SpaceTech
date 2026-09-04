@@ -122,23 +122,100 @@
     </section>
 
     <!-- ============================================================
-         AGENDA — pendiente de contenido del equipo
+         2023 — cada tarjeta es un hito de la temporada
          ============================================================ -->
-    <section class="section">
-      <div class="container section__grid">
-        <div class="section__head">
-          <p class="eyebrow">Agenda</p>
+    <section class="section section--alt year" id="a2023" data-carousel>
+      <div class="container">
+        <div class="year__head">
+          <div>
+            <p class="eyebrow">Temporada</p>
+            <h2 class="year__title" id="a2023-titulo">2023</h2>
+          </div>
+
+          <div class="carousel__controls" data-carousel-controls>
+            <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+            <button class="carousel__button" type="button" data-carousel-prev aria-label="Charla anterior">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                <path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+            </button>
+            <button class="carousel__button" type="button" data-carousel-next aria-label="Charla siguiente">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="section__body">
-          <!-- Descripción pendiente -->
-          <p class="section__text"></p>
-
-          <!-- Espacio reservado para el listado de charlas -->
-          <div class="page-slot" aria-hidden="true"></div>
+        <div class="carousel carousel--wide">
+          <div class="carousel__track" data-carousel-track
+               role="region" aria-labelledby="a2023-titulo" tabindex="0">
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/charlas/2023/seminario_teorica.jpg"
+                         alt="Juan José Mejía explicando el desarrollo del tensor de inercia en un tablero durante el seminario"
+                         width="1200" height="800" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2023 · Seminario</p>
+                    <h3 class="card__title">Dinámica de vuelo orbital</h3>
+                    <p class="card__text">Juan José Mejía, líder de la División Teórica, expone dinámica de vuelo orbital ante el capítulo.</p>
+                  </div>
+                </article>
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/charlas/2023/perspectivasDesarrolloAeroespacial.jpg"
+                         alt="Giovanna Ramírez hablando en el escenario junto a los panelistas, con una diapositiva sobre entrenamiento de astronautas análogos"
+                         width="1200" height="800" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2023 · Panel</p>
+                    <h3 class="card__title">Perspectivas de desarrollo aeroespacial</h3>
+                    <p class="card__text">Juan José Mejía presenta su libro «Astronáutica»; Santiago Prada, estudiante de maestría en Ingeniería Mecánica, expone su proyecto de tesis, el cohete AINKAA H1; y Giovanna Ramírez, ingeniera electrónica y astronauta análoga, comparte su experiencia y participación en el sector aeroespacial.</p>
+                  </div>
+                </article>
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/charlas/2023/zerog.jpg"
+                         alt="Integrantes del capítulo presentando el proyecto ante la sociedad de egresados Uniandinos"
+                         width="1200" height="800" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2023 · Divulgación</p>
+                    <h3 class="card__title">Zero-G en Uniandinos</h3>
+                    <p class="card__text">Presentación del proyecto y del contexto de la industria aeroespacial en la sociedad de egresados Uniandinos.</p>
+                  </div>
+                </article>
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/charlas/2023/intro_cubesats.jpg"
+                         alt="Sesión de trabajo con el desarrollo matemático del control de actitud proyectado en el tablero"
+                         width="1200" height="800" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2023 · Taller</p>
+                    <h3 class="card__title">Introducción a CubeSats</h3>
+                    <p class="card__text">Desarrollo matemático del proyecto de satélites de Spacetech.</p>
+                  </div>
+                </article>
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/charlas/2023/airbus.jpg"
+                         alt="Integrantes del capítulo junto a los delegados de Airbus tras la presentación de proyectos"
+                         width="1200" height="800" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2023 · Industria</p>
+                    <h3 class="card__title">Encuentro con Airbus</h3>
+                    <p class="card__text">Presentación de proyectos con delegados de Airbus.</p>
+                  </div>
+                </article>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Temporadas siguientes: duplicar la sección anterior cambiando el año -->
   </main>
 
   <footer class="footer">
@@ -156,5 +233,6 @@
 
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/scroll.js" defer></script>
+  <script src="assets/js/carousel.js" defer></script>
 </body>
 </html>

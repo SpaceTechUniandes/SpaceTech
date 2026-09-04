@@ -86,7 +86,7 @@ sección de la portada. Se llega a ellas desde el mega menú del header.
 | Ruta | Página |
 |---|---|
 | `/` | Portada |
-| `/charlas.html` | Charlas y eventos |
+| `/charlas.html` | Charlas, organizadas por temporada |
 | `/divisiones/teorica-computacional.html` | División Teórica y Computacional |
 | `/divisiones/coheteria.html` | División de Cohetería |
 | `/divisiones/satelital.html` | División Satelital |
@@ -135,3 +135,9 @@ pista: `carousel.js` recalcula el contador y habilita los controles solo. Con
 una tarjeta o ninguna los oculta, de modo que un carrusel a medio llenar no
 se ve roto — por eso el bloque de benchmark, todavía sin tarjetas, muestra su
 marco reservado en lugar de una pista vacía.
+
+La página de Charlas usa el mismo componente con el modificador
+`.carousel--wide`, que muestra tres tarjetas por vista en pantallas anchas en
+lugar de una. Cada temporada es una `<section class="year">` con su propio
+carrusel: para añadir un año se duplica la sección cambiando el título y las
+tarjetas.

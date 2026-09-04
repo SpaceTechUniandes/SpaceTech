@@ -731,11 +731,45 @@ body.nav-open {
   color: var(--color-accent);
 }
 
+.card__title {
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
 .card__text {
   max-width: 46ch;
   margin-top: 0.6rem;
   font-size: 0.95rem;
   line-height: 1.5;
+}
+
+/* ------------------------------------------------------------
+   9d. Temporadas de charlas
+   ------------------------------------------------------------ */
+.year__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.year__title {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* En página completa caben varias tarjetas a la vez */
+.carousel--wide .carousel__track > .card {
+  flex-basis: 86%;
 }
 
 /* ------------------------------------------------------------
@@ -1109,6 +1143,11 @@ body.nav-open {
     flex-basis: 100%;
   }
 
+  /* A ancho completo caben dos tarjetas, y se insinúa la tercera */
+  .carousel--wide .carousel__track > .card {
+    flex-basis: calc((100% - 1.5rem) / 2);
+  }
+
 }
 
 /* ------------------------------------------------------------
@@ -1117,6 +1156,11 @@ body.nav-open {
 @media (min-width: 1024px) {
   .brand__badge {
     display: block;
+  }
+
+  /* Tres tarjetas por vista en pantallas anchas */
+  .carousel--wide .carousel__track > .card {
+    flex-basis: calc((100% - 3rem) / 3);
   }
 
 
