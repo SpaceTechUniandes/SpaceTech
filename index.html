@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spacetech AESS · Universidad de los Andes</title>
+  <meta name="description" content="Capítulo estudiantil de la IEEE Aerospace and Electronic Systems Society en la Universidad de los Andes. Cohetería, diseño satelital, sistemas aeronáuticos y computación aeroespacial.">
+
+  <link rel="icon" href="logo.png" type="image/png">
+
+  <!-- Tipografía: Albert Sans (titulares y cuerpo) + IBM Plex Mono (datos técnicos), pesos 400 y 500 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Salto de navegación para lectores de pantalla y teclado -->
+  <a class="skip-link" href="#hero">Saltar al contenido</a>
+
+  <!-- ============================================================
+       HEADER — navegación fija
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <!-- Marca tipográfica, sin isotipo -->
+      <a class="brand" href="#hero" aria-label="Spacetech AESS — inicio">
+        <span class="brand__name">Spacetech<span class="brand__name-accent">AESS</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <!-- Toggle del menú móvil; la lógica vive en js/nav.js -->
+        <button class="nav__toggle" type="button" id="nav-toggle"
+                aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú de navegación">
+          <span class="nav__toggle-bar" aria-hidden="true"></span>
+          <span class="nav__toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <ul class="nav__list" id="nav-menu">
+          <li class="nav__item"><a class="nav__link" href="#nosotros">Nosotros</a></li>
+
+          <!-- Divisiones: disparador de mega menú. Cada división es una página propia. -->
+          <li class="nav__item nav__item--menu" data-menu>
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="menu-divisiones">
+              Divisiones
+              <svg class="nav__chevron" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">
+                <path d="M2 4.5L6 8l4-3.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </button>
+
+            <div class="mega" id="menu-divisiones">
+              <div class="mega__inner">
+                <ul class="mega__list">
+                  <li>
+                    <a class="mega__link" href="divisiones/teorica-computacional.html">
+                      <span class="mega__index">01</span>
+                      <span class="mega__name">División Teórica y Computacional</span>
+                      <span class="mega__tag">Mecánica de vuelo · Simulación · Dinámica orbital</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="mega__link" href="divisiones/coheteria.html">
+                      <span class="mega__index">02</span>
+                      <span class="mega__name">División de Cohetería</span>
+                      <span class="mega__tag">Propulsión · Estructura · Lanzamiento</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="mega__link" href="divisiones/satelital.html">
+                      <span class="mega__index">03</span>
+                      <span class="mega__name">División Satelital</span>
+                      <span class="mega__tag">Diseño de misión · Comunicaciones · Sistemas embebidos</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="mega__link" href="divisiones/sistemas-aeronauticos.html">
+                      <span class="mega__index">04</span>
+                      <span class="mega__name">División de Sistemas Aeronáuticos</span>
+                      <span class="mega__tag">Aerodinámica · Aviónica · Control de vuelo</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="mega__link" href="divisiones/propulsor-ionico.html">
+                      <span class="mega__index">05</span>
+                      <span class="mega__name">División de Propulsor Iónico</span>
+                      <span class="mega__tag">Propulsión eléctrica · Plasma · Vacío</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="mega__link" href="divisiones/sputnik-medios-creativos.html">
+                      <span class="mega__index">06</span>
+                      <span class="mega__name">División Sputnik y Medios Creativos</span>
+                      <span class="mega__tag">Divulgación · Branding · Contenido audiovisual</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav__item"><a class="nav__link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__spacer" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO — pantalla completa
+         ============================================================ -->
+    <section class="hero" id="hero">
+      <!-- TODO: hero background media (imagen o video con overlay oscuro) -->
+      <div class="hero__backdrop" id="hero-backdrop" aria-hidden="true"></div>
+
+      <!-- Retícula técnica: líneas verticales finas, puramente decorativa -->
+      <div class="grid-lines" aria-hidden="true">
+        <span class="grid-lines__line"></span>
+        <span class="grid-lines__line"></span>
+        <span class="grid-lines__line"></span>
+        <span class="grid-lines__line"></span>
+      </div>
+
+      <div class="hero__inner container">
+        <!-- Dos columnas enfrentadas: texto a la izquierda, foto a la derecha -->
+        <div class="hero__row">
+          <div class="hero__copy">
+            <p class="eyebrow hero__eyebrow">
+              IEEE Aerospace and Electronic Systems Society
+              <span class="hero__eyebrow-accent">· Universidad de los Andes</span>
+            </p>
+
+            <h1 class="hero__title">Ingeniería aeroespacial, aeronáutica e innovación en Latin America</h1>
+
+            <p class="hero__lead">
+              Somos el capítulo de Aerospace and Electronic Systems Society de la Universidad de
+              los Andes, enfocados en diseño y competencias de cohetería, diseño satelital, sistemas
+              aeronáuticos y computación que aporten al desarrollo aeroespacial y aeronáutico en la
+              industria Latinoamericana.
+            </p>
+          </div>
+
+          <!-- Fotografía del equipo de cohetería -->
+          <figure class="hero__figure">
+            <img class="hero__image" src="brand/team_coheteria.png"
+                 alt="Integrantes de la División de Cohetería con sus cohetes en el campo de lanzamiento"
+                 width="1405" height="1080">
+            <figcaption class="hero__caption">
+              <span class="hero__caption-label">División de Cohetería — L1 Tripoli Certification</span>
+              <span class="hero__caption-note">Somos la universidad de Colombia con más certificaciones Tripoli en 2026.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Ficha técnica del capítulo al pie del hero -->
+      <dl class="hero__meta container">
+        <div class="hero__meta-item">
+          <dt>Sociedad</dt>
+          <dd>IEEE AESS</dd>
+        </div>
+        <div class="hero__meta-item">
+          <dt>Institución</dt>
+          <dd>Universidad de los Andes</dd>
+        </div>
+        <div class="hero__meta-item">
+          <dt>Sede</dt>
+          <dd>Bogotá, Colombia</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ============================================================
+         TRAYECTORIA — historia y benchmark del capítulo
+         Estructura lista; el contenido lo aporta el equipo.
+         ============================================================ -->
+    <section class="section section--alt" id="nosotros">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">01 — Trayectoria</p>
+          <h2 class="section__title">Historia y benchmark</h2>
+        </div>
+
+        <div class="track">
+          <!-- Bloque de historia: línea de tiempo pendiente de contenido -->
+          <article class="track__block">
+            <h3 class="track__title">Historia</h3>
+            <!-- Reseña pendiente -->
+            <p class="track__text"></p>
+            <!-- Espacio reservado para la línea de tiempo -->
+            <div class="track__slot" aria-hidden="true"></div>
+          </article>
+
+          <!-- Bloque de benchmark: indicadores pendientes de contenido -->
+          <article class="track__block">
+            <h3 class="track__title">Benchmark</h3>
+            <!-- Reseña pendiente -->
+            <p class="track__text"></p>
+            <!-- Espacio reservado para los indicadores comparativos -->
+            <div class="track__slot" aria-hidden="true"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         REDES SOCIALES
+         ============================================================ -->
+    <section class="section section--alt contact" id="contacto">
+      <div class="container section__grid">
+        <div class="section__head">
+          <p class="eyebrow">02 — Síguenos</p>
+          <h2 class="section__title">Nuestras redes sociales</h2>
+        </div>
+
+        <div class="section__body">
+          <ul class="contact__links">
+            <li>
+              <a class="contact__link" href="https://www.instagram.com/spacetech_uniandes/"
+                 target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="2.5" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  <circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  <circle cx="14.8" cy="5.2" r="1" fill="currentColor"/>
+                </svg>
+                <span class="contact__name">Instagram</span>
+                <span class="contact__handle">@spacetech_uniandes</span>
+              </a>
+            </li>
+            <li>
+              <a class="contact__link" href="https://www.linkedin.com/company/spacetech-aess-uniandes/posts/?feedView=all"
+                 target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="2.5" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  <path d="M6 8.5V14M6 5.6v.1M9.5 14V8.5M9.5 11c0-1.6 1-2.5 2.3-2.5S14 9.4 14 11v3"
+                        fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+                </svg>
+                <span class="contact__name">LinkedIn</span>
+                <span class="contact__handle">spacetech-aess-uniandes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <img class="footer__badge" src="brand/aees_branch.png"
+           alt="IEEE AESS · Universidad de los Andes IEEE Student Branch"
+           width="1192" height="192" loading="lazy">
+
+      <div class="footer__meta">
+        <p class="footer__line">Spacetech AESS · Universidad de los Andes · Bogotá, Colombia</p>
+        <!-- El año lo inyecta js/nav.js -->
+        <p class="footer__copy">© <span id="footer-year">2026</span> Spacetech AESS. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+</body>
+</html>

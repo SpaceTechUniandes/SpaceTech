@@ -1,0 +1,1046 @@
+/* ============================================================
+   SPACETECH AESS — hoja de estilos principal
+   Orden: variables · reset · tipografía · utilidades · componentes
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Variables de diseño
+   Paleta extraída del isotipo (logo.png): negro puro + oro #f7ca45
+   ------------------------------------------------------------ */
+:root {
+  --color-bg-primary: #0a0a0a;    /* negro del logo, levantado apenas del #000 */
+  --color-bg-secondary: #121212;  /* variante oscura para alternar secciones */
+  --color-accent: #f7ca45;        /* oro dominante del isotipo */
+  --color-accent-hover: #d4a92e;  /* oro oscurecido para estados :hover */
+  --color-text-primary: #f0f0f0;
+  --color-border: #2a2a2a;
+  --color-border-faint: #1a1a1a;  /* retícula técnica, casi imperceptible */
+
+  /* Dos familias con roles separados: la sans para voz editorial,
+     la mono para todo dato técnico (etiquetas, tags, índices, cifras). */
+  --font-display: 'Albert Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --header-height: 64px;
+  --container-padding: 1.5rem;
+  --max-width: 1400px;
+
+  /* Distancia real desde el borde del viewport hasta la columna de texto.
+     Permite alinear bloques a sangre completa con el contenido del container. */
+  --edge: calc(max(0px, (100vw - var(--max-width))) / 2 + var(--container-padding));
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ------------------------------------------------------------
+   2. Reset mínimo
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1, h2, h3,
+p, dl, dd,
+ul, figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   3. Tipografía base
+   ------------------------------------------------------------ */
+body {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Compensa el header fijo cuando se salta a una sección por ancla */
+section {
+  scroll-margin-top: var(--header-height);
+}
+
+/* Etiqueta superior de sección: pequeña, en mayúsculas, tracking abierto */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.section__title {
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------
+   4. Utilidades
+   ------------------------------------------------------------ */
+/* Todos los bloques —centrados o a sangre completa— comparten --edge,
+   así la columna de texto queda alineada en toda la página. */
+.container {
+  width: 100%;
+  padding-inline: var(--edge);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--container-padding);
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-bg-primary);
+  background-color: var(--color-accent);
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* Foco visible y consistente en todo el sitio */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Retícula de líneas verticales — decorativa, sólo desktop */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+.grid-lines__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px solid var(--color-border-faint);
+}
+
+.grid-lines__line:nth-child(1) { left: 20%; }
+.grid-lines__line:nth-child(2) { left: 40%; }
+.grid-lines__line:nth-child(3) { left: 60%; }
+.grid-lines__line:nth-child(4) { left: 80%; }
+
+/* ------------------------------------------------------------
+   5. Header y navegación
+   ------------------------------------------------------------ */
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+/* Estado activado desde js/nav.js al superar 60px de scroll */
+.header--scrolled {
+  background-color: rgba(10, 10, 10, 0.78);
+  border-bottom-color: var(--color-border);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Tres columnas: marca a la izquierda, nav centrado, columna espejo a la
+   derecha para que el centro sea el centro real del viewport. */
+.header__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  height: var(--header-height);
+  padding-inline: var(--edge);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.brand__name {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.brand__name-accent {
+  margin-left: 0.35em;
+  color: var(--color-accent);
+}
+
+/* Columna derecha de compensación, sólo desktop */
+.header__spacer {
+  display: none;
+}
+
+.nav__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  padding: 0 8px;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text-primary);
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+
+/* Transformación a "X" cuando el menú está abierto */
+.nav-open .nav__toggle-bar:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.nav-open .nav__toggle-bar:nth-child(2) {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Menú móvil: panel a pantalla completa bajo el header */
+.nav__list {
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem var(--container-padding);
+  overflow-y: auto;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease), visibility 0.25s var(--ease);
+}
+
+.nav-open .nav__list {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav__link,
+.nav__trigger {
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.1rem 0;
+  font-size: 1.05rem;
+  text-align: left;
+  color: var(--color-text-primary);
+  transition: color 0.2s var(--ease);
+}
+
+.nav__link:hover,
+.nav__trigger:hover,
+.nav__link--active,
+.nav__item.is-open > .nav__trigger {
+  color: var(--color-accent);
+}
+
+/* Cheurón del disparador de menú */
+.nav__chevron {
+  margin-left: auto;
+  transition: transform 0.3s var(--ease);
+}
+
+.nav__item.is-open .nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* Bloquea el scroll del documento con el menú abierto */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   5b. Mega menú (panel desplegable de la navegación)
+   En móvil es un acordeón dentro del panel; en desktop, un panel
+   a sangre completa bajo el header.
+   ------------------------------------------------------------ */
+.mega {
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease);
+}
+
+.nav__item.is-open > .mega {
+  grid-template-rows: 1fr;
+}
+
+.mega__inner {
+  min-height: 0;
+}
+
+.mega__list {
+  display: grid;
+  gap: 1px;
+  padding-bottom: 1rem;
+}
+
+.mega__link {
+  display: block;
+  padding: 0.9rem 0 0.9rem 1rem;
+  border-left: 2px solid transparent;
+  transition: border-color 0.3s ease, background-color 0.3s var(--ease);
+}
+
+.mega__link:hover,
+.mega__link:focus-visible {
+  border-left-color: var(--color-accent);
+  background-color: var(--color-bg-secondary);
+}
+
+.mega__index {
+  font-family: var(--font-mono);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.mega__name {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.mega__tag {
+  font-family: var(--font-mono);
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+}
+
+/* ------------------------------------------------------------
+   6. Hero
+   ------------------------------------------------------------ */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + 3rem);
+  padding-bottom: 2rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Capa de fondo — recibe el parallax desde js/scroll.js.
+   El SVG es vectorial: campo de estrellas, órbitas y limbo planetario. */
+.hero__backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -20%;
+  left: 0;
+  background-color: var(--color-bg-primary);
+  background-image: url('../brand/space-backdrop.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  will-change: transform;
+}
+
+.hero__inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* Eyebrow del hero: blanco con la institución en oro */
+.hero__eyebrow {
+  color: var(--color-text-primary);
+}
+
+.hero__eyebrow-accent {
+  color: var(--color-accent);
+}
+
+/* El titular vive en la columna izquierda: escala algo menor para que
+   quepa junto a la foto y la ficha técnica en una sola pantalla. */
+.hero__title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+/* Texto a la izquierda, fotografía a la derecha, enfrentados */
+.hero__row {
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* El bloque de texto va centrado en su mitad, en ambos ejes */
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__lead {
+  max-width: 58ch;
+  margin-top: 1.75rem;
+  color: var(--color-text-primary);
+}
+
+/* Marco de la fotografía: sin radio, borde fino, recorte controlado */
+.hero__figure {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--color-border);
+}
+
+/* En móvil la foto conserva proporción; en desktop se estira para
+   ocupar el espacio libre (ver media query de 768px). */
+.hero__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero__caption {
+  padding: 0.85rem 1rem;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.hero__caption-label {
+  font-family: var(--font-mono);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.hero__caption-note {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-text-primary);
+}
+
+.hero__meta {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.hero__meta-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__meta-item dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.hero__meta-item dd {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------------
+   8. Secciones genéricas (Nosotros / Contacto)
+   ------------------------------------------------------------ */
+.section {
+  padding-block: 5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section--alt {
+  background-color: var(--color-bg-secondary);
+}
+
+.section__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.section__title {
+  margin-top: 1rem;
+  max-width: 20ch;
+}
+
+.section__text {
+  max-width: 60ch;
+  color: var(--color-text-primary);
+}
+
+/* El párrafo vacío no debe colapsar ni dejar hueco visible */
+.section__text:empty,
+.track__text:empty {
+  display: none;
+}
+
+.fact-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fact__label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.fact__value {
+  font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------
+   9. Trayectoria — historia y benchmark
+   Estructura lista, contenido pendiente del equipo.
+   ------------------------------------------------------------ */
+.track {
+  display: grid;
+  gap: 3rem;
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.track__block {
+  padding-top: 2rem;
+}
+
+.track__title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.track__text {
+  max-width: 52ch;
+  margin-top: 1rem;
+}
+
+/* Marco vacío a la espera de la línea de tiempo y los indicadores */
+.track__slot {
+  min-height: 260px;
+  margin-top: 1.75rem;
+  border: 1px solid var(--color-border);
+}
+
+/* ------------------------------------------------------------
+   9b. Páginas de división (/divisiones/*.html)
+   ------------------------------------------------------------ */
+.page-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 60vh;
+  padding-top: calc(var(--header-height) + 4rem);
+  padding-bottom: 4rem;
+  background-image: url('../brand/space-backdrop.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Velo lateral: los motivos tienen trazos claros que pueden cruzar la
+   columna de texto. Este oscurecimiento garantiza contraste AA sobre
+   cualquier fondo, actual o futuro. Es negro con alfa, no color. */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+              rgba(10, 10, 10, 0.94) 0%,
+              rgba(10, 10, 10, 0.88) 40%,
+              rgba(10, 10, 10, 0) 78%);
+  pointer-events: none;
+}
+
+.page-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Un motivo por división sobre el mismo sistema visual: estrellas, velo,
+   trazos finos en gris y acentos en oro. La Teórica usa el fondo base. */
+.page-hero--coheteria { background-image: url('../brand/bg-coheteria.svg'); }
+.page-hero--satelital { background-image: url('../brand/bg-satelital.svg'); }
+.page-hero--aeronauticos { background-image: url('../brand/bg-aeronauticos.svg'); }
+.page-hero--ionico { background-image: url('../brand/bg-ionico.svg'); }
+.page-hero--sputnik { background-image: url('../brand/bg-sputnik.svg'); }
+
+.breadcrumb {
+  font-family: var(--font-mono);
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+}
+
+.breadcrumb__link {
+  transition: color 0.2s var(--ease);
+}
+
+.breadcrumb__link:hover {
+  color: var(--color-accent);
+}
+
+.page-hero__index {
+  color: var(--color-accent);
+}
+
+.page-hero__title {
+  max-width: 20ch;
+  margin-top: 1rem;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.page-hero__tag {
+  font-family: var(--font-mono);
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Marco vacío a la espera de proyectos, equipo y galería */
+.page-slot {
+  min-height: 280px;
+  border: 1px solid var(--color-border);
+}
+
+/* ------------------------------------------------------------
+   10. Redes sociales
+   ------------------------------------------------------------ */
+.contact__links {
+  border-top: 1px solid var(--color-border);
+}
+
+.contact__link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.35rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  transition: color 0.25s var(--ease), padding-left 0.25s var(--ease);
+}
+
+.contact__link:hover {
+  padding-left: 0.5rem;
+  color: var(--color-accent);
+}
+
+.contact__name {
+  font-weight: 500;
+}
+
+/* El identificador de la cuenta se alinea al final de la fila */
+.contact__handle {
+  font-family: var(--font-mono);
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+/* ------------------------------------------------------------
+   11. Footer
+   ------------------------------------------------------------ */
+.footer {
+  padding-block: 3rem;
+  background-color: var(--color-bg-primary);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer__badge {
+  width: auto;
+  max-width: 100%;
+  height: 40px;
+}
+
+.footer__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__line {
+  font-size: 0.85rem;
+}
+
+.footer__copy {
+  font-size: 0.75rem;
+  color: var(--color-text-primary);
+}
+
+/* ------------------------------------------------------------
+   12. Animaciones de entrada (IntersectionObserver → .is-visible)
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------
+   13. Tablet — 768px
+   ------------------------------------------------------------ */
+@media (min-width: 768px) {
+  :root {
+    --header-height: 72px;
+    --container-padding: 2.5rem;
+  }
+
+  .grid-lines {
+    display: block;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
+  /* Nav centrado: la tercera columna equilibra el ancho de la marca */
+  .header__inner {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .header__spacer {
+    display: block;
+  }
+
+  /* El menú vuelve a ser una fila horizontal */
+  .nav__list {
+    position: static;
+    flex-direction: row;
+    gap: 2.25rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .nav__item {
+    border: 0;
+  }
+
+  /* El item mantiene el hover mientras el cursor baja al panel */
+  .nav__item--menu {
+    position: static;
+  }
+
+  .nav__link,
+  .nav__trigger {
+    position: relative;
+    width: auto;
+    gap: 0.4rem;
+    padding: 0.25rem 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* Subrayado de acento para la sección visible o el menú abierto */
+  .nav__link::after,
+  .nav__trigger::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+  }
+
+  .nav__link--active::after,
+  .nav__item.is-open > .nav__trigger::after {
+    transform: scaleX(1);
+  }
+
+  .nav__chevron {
+    margin-left: 0;
+  }
+
+  /* Panel a sangre completa anclado bajo el header */
+  .mega {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: 0;
+    display: block;
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease),
+                visibility 0.25s var(--ease);
+  }
+
+  .nav__item.is-open > .mega {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .mega__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 2rem;
+    padding: 2.5rem var(--edge) 3rem;
+  }
+
+  .mega__link {
+    height: 100%;
+    padding: 1.25rem 1.5rem 1.5rem 1.25rem;
+  }
+
+  /* Alto definido: sin él los hijos flex no reparten el espacio sobrante.
+     El min-height evita que en pantallas muy bajas se aplaste todo. */
+  .hero {
+    height: 100vh;
+    min-height: 620px;
+    padding-top: calc(var(--header-height) + 1.5rem);
+    padding-bottom: 0;
+  }
+
+  /* Texto y foto enfrentados, ambos centrados verticalmente en su mitad.
+     La fila ocupa el alto libre del hero. */
+  .hero__row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .hero__figure {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    max-height: 100%;
+    min-height: 0;
+  }
+
+  /* La foto se adapta al alto disponible sin desbordar la pantalla */
+  .hero__image {
+    min-height: 0;
+    aspect-ratio: auto;
+    height: 100%;
+    max-height: 52vh;
+  }
+
+  /* Tres fichas de igual ancho: reparten todo el espacio disponible
+     y su contenido va centrado */
+  .hero__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero__meta-item {
+    padding: 1rem 1.5rem 1.15rem;
+    text-align: center;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 0;
+  }
+
+  .hero__meta-item:last-child {
+    border-right: 0;
+  }
+
+  .section {
+    padding-block: 7rem;
+  }
+
+  .section__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 4rem;
+  }
+
+  /* Historia y benchmark, lado a lado */
+  .track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+  }
+
+}
+
+/* ------------------------------------------------------------
+   14. Desktop — 1024px
+   ------------------------------------------------------------ */
+@media (min-width: 1024px) {
+  .brand__badge {
+    display: block;
+  }
+
+
+
+
+
+  .footer__inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .footer__badge {
+    height: 48px;
+  }
+
+  .footer__meta {
+    align-items: flex-end;
+    padding-top: 0;
+    border-top: 0;
+    text-align: right;
+  }
+}
+
+/* ------------------------------------------------------------
+   15. Wide — 1440px
+   ------------------------------------------------------------ */
+@media (min-width: 1440px) {
+  :root {
+    --container-padding: 4rem;
+  }
+
+}
+
+/* ------------------------------------------------------------
+   16. Movimiento reducido
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
