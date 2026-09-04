@@ -1,0 +1,21 @@
+{
+  "name": "spacetech-aess",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page del capítulo IEEE AESS de la Universidad de los Andes",
+  "homepage": "https://spacetech.lat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpaceTechUniandes/SpaceTech.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "python3 -m http.server 8000 --directory public",
+    "backgrounds": "python3 tools/generate-backgrounds.py",
+    "check:links": "python3 tools/check-links.py",
+    "check": "npm run check:links"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,50 @@
+name: CI
+
+# Validaciones en cada cambio. No hay build ni dependencias que instalar:
+# el sitio es estático y las comprobaciones usan sólo python y node.
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Referencias locales
+        run: python3 tools/check-links.py
+
+      - name: Sintaxis del JavaScript del sitio
+        run: |
+          for f in public/assets/js/*.js; do
+            node --check "$f"
+          done
+
+      - name: Los fondos SVG son reproducibles
+        run: |
+          python3 tools/generate-backgrounds.py
+          if ! git diff --quiet -- public/assets/backgrounds; then
+            echo "Los SVG del repositorio no coinciden con los que genera tools/generate-backgrounds.py"
+            git diff --stat -- public/assets/backgrounds
+            exit 1
+          fi
+
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sintaxis de las funciones serverless
+        run: |
+          for f in api/*.js; do
+            node --input-type=module --check < "$f"
+          done

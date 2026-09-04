@@ -1,0 +1,49 @@
+name: Desplegar a GitHub Pages
+
+# Publica el contenido de public/ en GitHub Pages.
+# El sitio es estático y no tiene paso de build: se sube tal cual.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos mínimos que necesita el despliegue de Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez; no cancela el que esté en curso
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    name: Verificar referencias
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar que todo enlace local resuelve
+        run: python3 tools/check-links.py
+
+  desplegar:
+    name: Desplegar
+    needs: verificar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - name: Subir public/ como artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

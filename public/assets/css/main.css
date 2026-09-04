@@ -405,7 +405,7 @@ body.nav-open {
   bottom: -20%;
   left: 0;
   background-color: var(--color-bg-primary);
-  background-image: url('../brand/space-backdrop.svg');
+  background-image: url('../backgrounds/space-backdrop.svg');
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -630,7 +630,7 @@ body.nav-open {
   min-height: 60vh;
   padding-top: calc(var(--header-height) + 4rem);
   padding-bottom: 4rem;
-  background-image: url('../brand/space-backdrop.svg');
+  background-image: url('../backgrounds/space-backdrop.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -658,11 +658,11 @@ body.nav-open {
 
 /* Un motivo por división sobre el mismo sistema visual: estrellas, velo,
    trazos finos en gris y acentos en oro. La Teórica usa el fondo base. */
-.page-hero--coheteria { background-image: url('../brand/bg-coheteria.svg'); }
-.page-hero--satelital { background-image: url('../brand/bg-satelital.svg'); }
-.page-hero--aeronauticos { background-image: url('../brand/bg-aeronauticos.svg'); }
-.page-hero--ionico { background-image: url('../brand/bg-ionico.svg'); }
-.page-hero--sputnik { background-image: url('../brand/bg-sputnik.svg'); }
+.page-hero--coheteria { background-image: url('../backgrounds/bg-coheteria.svg'); }
+.page-hero--satelital { background-image: url('../backgrounds/bg-satelital.svg'); }
+.page-hero--aeronauticos { background-image: url('../backgrounds/bg-aeronauticos.svg'); }
+.page-hero--ionico { background-image: url('../backgrounds/bg-ionico.svg'); }
+.page-hero--sputnik { background-image: url('../backgrounds/bg-sputnik.svg'); }
 
 .breadcrumb {
   font-family: var(--font-mono);
