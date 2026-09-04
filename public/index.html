@@ -99,6 +99,7 @@
             </div>
           </li>
 
+          <li class="nav__item"><a class="nav__link" href="charlas.html">Charlas</a></li>
           <li class="nav__item"><a class="nav__link" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -184,21 +185,73 @@
         </div>
 
         <div class="track">
-          <!-- Bloque de historia: línea de tiempo pendiente de contenido -->
-          <article class="track__block">
-            <h3 class="track__title">Historia</h3>
-            <!-- Reseña pendiente -->
-            <p class="track__text"></p>
-            <!-- Espacio reservado para la línea de tiempo -->
-            <div class="track__slot" aria-hidden="true"></div>
+          <!-- Historia: carrusel de hitos -->
+          <article class="track__block" data-carousel>
+            <div class="track__head">
+              <h3 class="track__title" id="historia-titulo">Historia</h3>
+              <div class="carousel__controls" data-carousel-controls>
+                <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+                <button class="carousel__button" type="button" data-carousel-prev aria-label="Hito anterior">
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  </svg>
+                </button>
+                <button class="carousel__button" type="button" data-carousel-next aria-label="Hito siguiente">
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel">
+              <div class="carousel__track" data-carousel-track
+                   role="region" aria-labelledby="historia-titulo" tabindex="0">
+                <article class="card">
+                  <figure class="card__media">
+                    <img class="card__image" src="assets/img/historia/2022_propulsion_hibrida.jpg"
+                         alt="Cohete AINKAA H1 de propulsión híbrida en el laboratorio de estructuras"
+                         width="1194" height="1352" loading="lazy">
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__meta">2022 · Propulsión híbrida</p>
+                    <p class="card__text">
+                      Modelo de desarrollo de cohete de propulsión híbrida como parte del
+                      Proyecto Uniandino Aeroespacial.
+                    </p>
+                  </div>
+                </article>
+                <!-- Siguientes hitos: añadir aquí más <article class="card"> -->
+              </div>
+            </div>
           </article>
 
-          <!-- Bloque de benchmark: indicadores pendientes de contenido -->
-          <article class="track__block">
-            <h3 class="track__title">Benchmark</h3>
-            <!-- Reseña pendiente -->
-            <p class="track__text"></p>
-            <!-- Espacio reservado para los indicadores comparativos -->
+          <!-- Benchmark: mismo carrusel, pendiente de tarjetas -->
+          <article class="track__block" data-carousel>
+            <div class="track__head">
+              <h3 class="track__title" id="benchmark-titulo">Benchmark</h3>
+              <div class="carousel__controls" data-carousel-controls>
+                <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+                <button class="carousel__button" type="button" data-carousel-prev aria-label="Indicador anterior">
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  </svg>
+                </button>
+                <button class="carousel__button" type="button" data-carousel-next aria-label="Indicador siguiente">
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel">
+              <div class="carousel__track" data-carousel-track
+                   role="region" aria-labelledby="benchmark-titulo" tabindex="0">
+                <!-- Tarjetas pendientes: añadir aquí <article class="card"> -->
+              </div>
+            </div>
+            <!-- Espacio reservado mientras no haya tarjetas -->
             <div class="track__slot" aria-hidden="true"></div>
           </article>
         </div>
@@ -266,5 +319,6 @@
 
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/scroll.js" defer></script>
+  <script src="assets/js/carousel.js" defer></script>
 </body>
 </html>

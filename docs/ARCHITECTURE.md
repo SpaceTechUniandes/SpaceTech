@@ -33,6 +33,7 @@ los dos despliegues son equivalentes.
 .
 ├── public/                  Todo lo que se publica. Es la raíz del sitio.
 │   ├── index.html           Portada
+│   ├── charlas.html         Charlas y eventos
 │   ├── divisiones/          Una página por división, ruta propia
 │   ├── assets/
 │   │   ├── css/main.css     Hoja de estilos única
@@ -68,6 +69,7 @@ Sin framework y sin dependencias. Tres piezas:
 | `assets/css/main.css` | Variables de diseño, layout, tipografía, animaciones |
 | `assets/js/nav.js` | Header fijo, menú móvil, mega menú, año del footer |
 | `assets/js/scroll.js` | IntersectionObserver, scroll suave, parallax |
+| `assets/js/carousel.js` | Carruseles de tarjetas (historia, benchmark) |
 
 Reglas del proyecto:
 
@@ -84,6 +86,7 @@ sección de la portada. Se llega a ellas desde el mega menú del header.
 | Ruta | Página |
 |---|---|
 | `/` | Portada |
+| `/charlas.html` | Charlas y eventos |
 | `/divisiones/teorica-computacional.html` | División Teórica y Computacional |
 | `/divisiones/coheteria.html` | División de Cohetería |
 | `/divisiones/satelital.html` | División Satelital |
@@ -120,3 +123,15 @@ npm run backgrounds
 
 `.github/workflows/deploy-pages.yml` repite la verificación de enlaces antes
 de publicar, de modo que un enlace roto no llega a producción.
+
+## Carruseles
+
+Los bloques de historia y benchmark son carruseles de tarjetas de noticia.
+Cada bloque es un `[data-carousel]` que contiene su cabecera con controles y
+una pista `[data-carousel-track]` con las tarjetas.
+
+Para añadir un hito basta con copiar un `<article class="card">` dentro de la
+pista: `carousel.js` recalcula el contador y habilita los controles solo. Con
+una tarjeta o ninguna los oculta, de modo que un carrusel a medio llenar no
+se ve roto — por eso el bloque de benchmark, todavía sin tarjetas, muestra su
+marco reservado en lugar de una pista vacía.
